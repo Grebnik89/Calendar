@@ -1,0 +1,99 @@
+<!--
+Напишите функцию createCalendar(elem, year, month).
+
+Вызов функции должен создать календарь для заданного месяца month в году year и вставить его в elem.
+
+Календарь должен быть таблицей, где неделя – это <tr>, а день – это <th>. У таблицы должен быть заголовок с названиями дней недели, каждый день – <th>, первым днём недели должен быть понедельник.
+
+Например, createCalendar(cal, 2012, 9) сгенерирует в cal следующий календарь:
+-->
+
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    th,
+    th {
+      border: 1px solid black;
+      padding: 3px;
+      text-align: center;
+    }
+
+    th {
+      font-weight: bold;
+      background-color: #E6E6E6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div style="margin-bottom: 10px;">
+    <input type="month" id="input">
+  </div>
+
+  <div id="calendar"></div>
+
+  <script>
+    function createCalendar(elem, year, month) {
+
+      let date = new Date(year, month, 0);
+      let firstDay = new Date(year, (--month), 0);
+
+      let table = document.createElement('table');
+      table.innerHTML = `
+        <thead>
+        <tr>
+        <th>пн</th>
+        <th>вт</th>
+        <th>ср</th>
+        <th>чт</th>
+        <th>пт</th>
+        <th>сб</th>
+        <th>вс</th>
+        </tr>
+        </thead>
+        <tbody></tbody>`; 
+
+      let tbody = table.children[1];
+      
+      let weeks = Math.ceil((date.getDate() + firstDay.getDay()) / 7);
+
+      for (let j = 1, m = weeks; j <= m; j++) {
+
+        let tr = document.createElement('tr');
+
+        tbody.append(tr);
+
+        for (let i = 0; i <= 6; i++) {
+          tr.insertAdjacentHTML('beforeend', '<th></th>');
+        }
+      }
+
+      elem.append(table);
+      
+      let th = document.querySelectorAll('tbody>tr>th');  
+  
+      for (let d = 1, w = firstDay.getDay(); d <= date.getDate(); d++, w++) {
+        th[w].innerText = d;
+      }
+    };
+
+    input.oninput = function() {
+      let table = document.querySelector('table');
+      if (table) table.remove();
+
+      let year = +input.value.split('-')[0];
+      let month = +input.value.split('-')[1];
+      
+      createCalendar(calendar, year, month);
+    }
+</script>
+
+</body>
+</html>
