@@ -71,16 +71,16 @@
         tbody.append(tr);
 
         for (let i = 0; i <= 6; i++) {
-          tr.insertAdjacentHTML('beforeend', '<th></th>');
+          tr.insertAdjacentHTML('beforeend', '<td></td>');
         }
       }
 
       elem.append(table);
       
-      let th = document.querySelectorAll('tbody>tr>th');  
+      let td = document.querySelectorAll('tbody>tr>td');  
   
       for (let d = 1, w = firstDay.getDay(); d <= date.getDate(); d++, w++) {
-        th[w].innerText = d;
+        td[w].innerText = d;
       }
     };
 
