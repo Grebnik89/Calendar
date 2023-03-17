@@ -61,7 +61,7 @@
         <tbody></tbody>`; 
 
       let tbody = table.children[1];
-      
+      // далее расчет количества недель в заданном месяце (сколько строк делать)
       let weeks = Math.ceil((date.getDate() + firstDay.getDay()) / 7);
 
       for (let j = 1, m = weeks; j <= m; j++) {
@@ -79,6 +79,7 @@
       
       let td = document.querySelectorAll('tbody>tr>td');  
   
+      // цикл с добавлением чисел в таблицу 
       for (let d = 1, w = firstDay.getDay(); d <= date.getDate(); d++, w++) {
         td[w].innerText = d;
       }
